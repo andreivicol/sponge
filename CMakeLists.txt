@@ -1,27 +1,48 @@
-cmake_minimum_required (VERSION 2.8.5)
-cmake_policy (SET CMP0054 NEW)
-project (Sponge)
+cmake_minimum_required(VERSION 3.17)
+project(sponge)
 
-include (etc/build_defs.cmake)
-include (etc/build_type.cmake)
-include (etc/cflags.cmake)
+set(CMAKE_CXX_STANDARD 14)
 
-include (etc/doxygen.cmake)
+include_directories(libsponge)
+include_directories(libsponge/util)
+include_directories(tests)
 
-include (etc/clang_format.cmake)
-include (etc/clang_tidy.cmake)
-include (etc/cppcheck.cmake)
-
-include_directories ("${PROJECT_SOURCE_DIR}/libsponge/util")
-include_directories ("${PROJECT_SOURCE_DIR}/libsponge/tcp_helpers")
-include_directories ("${PROJECT_SOURCE_DIR}/libsponge")
-
-add_subdirectory ("${PROJECT_SOURCE_DIR}/libsponge")
-
-add_subdirectory ("${PROJECT_SOURCE_DIR}/apps")
-
-add_subdirectory ("${PROJECT_SOURCE_DIR}/tests")
-
-add_subdirectory ("${PROJECT_SOURCE_DIR}/doctests")
-
-include (etc/tests.cmake)
+add_executable(sponge
+        apps/webget.cc
+        doctests/address_dt.cc
+        doctests/address_example_1.cc
+        doctests/address_example_2.cc
+        doctests/address_example_3.cc
+        doctests/parser_dt.cc
+        doctests/parser_example.cc
+        doctests/socket_dt.cc
+        doctests/socket_example_1.cc
+        doctests/socket_example_2.cc
+        doctests/socket_example_3.cc
+        libsponge/util/address.cc
+        libsponge/util/address.hh
+        libsponge/util/buffer.cc
+        libsponge/util/buffer.hh
+        libsponge/util/eventloop.cc
+        libsponge/util/eventloop.hh
+        libsponge/util/file_descriptor.cc
+        libsponge/util/file_descriptor.hh
+        libsponge/util/parser.cc
+        libsponge/util/parser.hh
+        libsponge/util/socket.cc
+        libsponge/util/socket.hh
+        libsponge/util/tun.cc
+        libsponge/util/tun.hh
+        libsponge/util/util.cc
+        libsponge/util/util.hh
+        libsponge/byte_stream.cc
+        libsponge/byte_stream.hh
+        tests/byte_stream_capacity.cc
+        tests/byte_stream_construction.cc
+        tests/byte_stream_many_writes.cc
+        tests/byte_stream_one_write.cc
+        tests/byte_stream_test_harness.cc
+        tests/byte_stream_test_harness.hh
+        tests/byte_stream_two_writes.cc
+        tests/test_err_if.hh
+        tests/test_should_be.hh)

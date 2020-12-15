@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="sponge"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="B:/Projects/sponge/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sponge">
+				<Option output="B:/Projects/sponge/cmake-build-debug/sponge.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="B:/Projects/sponge/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="B:/Projects/sponge/libsponge"/>
+					<Add directory="B:/Projects/sponge/libsponge/util"/>
+					<Add directory="B:/Projects/sponge/tests"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 sponge"/>
+					<CompileFile command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sponge/fast">
+				<Option output="B:/Projects/sponge/cmake-build-debug/sponge.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="B:/Projects/sponge/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="B:/Projects/sponge/libsponge"/>
+					<Add directory="B:/Projects/sponge/libsponge/util"/>
+					<Add directory="B:/Projects/sponge/tests"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="B:/Compilers/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 sponge/fast"/>
+					<CompileFile command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="B:/Projects/sponge/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="B:/Projects/sponge/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="B:/Compilers/MinGW/mingw64/bin/mingw32-make.exe -f &quot;B:/Projects/sponge/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="B:/Projects/sponge/apps/webget.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/address_dt.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/address_example_1.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/address_example_2.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/address_example_3.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/parser_dt.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/parser_example.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/socket_dt.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/socket_example_1.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/socket_example_2.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/doctests/socket_example_3.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/byte_stream.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/byte_stream.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/address.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/address.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/buffer.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/buffer.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/eventloop.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/eventloop.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/file_descriptor.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/file_descriptor.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/parser.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/parser.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/socket.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/socket.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/tun.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/tun.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/util.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/libsponge/util/util.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_capacity.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_construction.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_many_writes.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_one_write.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_test_harness.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_test_harness.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/byte_stream_two_writes.cc">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/test_err_if.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/tests/test_should_be.hh">
+			<Option target="sponge"/>
+		</Unit>
+		<Unit filename="B:/Projects/sponge/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
