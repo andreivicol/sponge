@@ -3,15 +3,26 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
 void get_URL(const string &host, const string &path) {
     // Your code here.
 
+    stringstream requestStr;
+    requestStr << "GET " << path << " HTTP/1.1\r\n"
+        << "Host: " << host << " \r\n"
+        << "Connection: close \r\n";
+
     // You will need to connect to the "http" service on
     // the computer whose name is in the "host" string,
     // then request the URL path given in the "path" string.
+    Address myAddress{host, "HTTP"};
+    TCPSocket tcpSocket;
+    tcpSocket.bind(myAddress);
+    tcpSocket.connect(myAddress);
+
 
     // Then you'll need to print out everything the server sends back,
     // (not just one call to read() -- everything) until you reach
