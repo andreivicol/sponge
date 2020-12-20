@@ -20,17 +20,23 @@ class ByteStream {
     // different approaches.
 
     std::vector<char> stream;
-    bool allowWriting = true;
     size_t capacity;
     size_t bytesWritten;
     size_t bytesRead;
-    std::string remainingStream = "";
+
+    bool inputEnded = false;
+//    std::string remainingStream = "";
 
     bool _error{};  //!< Flag indicating that the stream suffered an error.
 
   public:
     //! Construct a stream with room for `capacity` bytes.
     ByteStream(const size_t capacity);
+
+    /**
+     * @brief check if there's space inside stream for further writing
+     */
+     bool allowWriting() const;
 
 
     //! \name "Input" interface for the writer
