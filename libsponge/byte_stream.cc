@@ -21,10 +21,10 @@ size_t ByteStream::write(const string &data) {
     //    auto bytesLeft = remaining_capacity();
     //    remainingStream += data;
 
-    if (not remaining_capacity()) {
-        read(stream.size());
-        bytesWritten += stream.size();
-    }
+//    if (not remaining_capacity()) {
+//        read(stream.size());
+//        bytesWritten += stream.size();
+//    }
 
     while (not data.empty()) {
         if (allowWriting()) {
@@ -35,9 +35,9 @@ size_t ByteStream::write(const string &data) {
             bytesWritten += std::min(remaining_capacity(), data.size() - bytesWritten);
         }
 
-        if (not remaining_capacity()) {
-            read(stream.size());
-        }
+//        if (not remaining_capacity()) {
+//            read(stream.size());
+//        }
     }
 
     //
@@ -104,4 +104,4 @@ size_t ByteStream::bytes_read() const { return bytesRead; }
 
 size_t ByteStream::remaining_capacity() const { return capacity - stream.size(); }
 
-bool ByteStream::allowWriting() const { return capacity > stream.size() }
+bool ByteStream::allowWriting() const { return capacity > stream.size() ;}
