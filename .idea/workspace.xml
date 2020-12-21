@@ -36,11 +36,6 @@
     <property name="cf.first.check.clang-format" value="false" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="sponge" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="sponge" TARGET_NAME="sponge" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="sponge" RUN_TARGET_NAME="sponge">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -60,6 +55,7 @@
       <workItem from="1608399885481" duration="2957000" />
       <workItem from="1608458030850" duration="2234000" />
       <workItem from="1608473679282" duration="9587000" />
+      <workItem from="1608545976429" duration="1543000" />
     </task>
     <servers />
   </component>

@@ -13,12 +13,13 @@
 class StreamReassembler {
   private:
     // Your code here -- add private members as necessary.
-    std::vector<std::pair<std::string, size_t>> storedInMemory;
-    size_t lastByteWritten;
-    size_t segmentSize;
 
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
+
+    std::vector<std::pair<std::string, size_t>> storedInMemory;
+    size_t lastByteWritten;
+    size_t segmentSize;
 
   public:
     //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.
