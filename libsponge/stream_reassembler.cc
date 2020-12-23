@@ -55,3 +55,5 @@ bool StreamReassembler::allowWritingToBuffer(const std::string &segment) const {
 }
 
 size_t StreamReassembler::freeMemory() { return _capacity - unassembled_bytes() - _output.buffer_size(); }
+
+size_t StreamReassembler::getLastByteWritten() {return lastByteWritten;}
