@@ -23,12 +23,10 @@ void TCPReceiver::segment_received(const TCPSegment &seg) {
     {
         _reassembler.push_substring(static_cast<std::string>(seg.payload().str()), index, seg.header().fin);
     }
-
-    if (seg.header().fin){
-        ;
-    }
-
-
+//
+//    if (seg.header().fin){
+//        ;
+//    }
 }
 
 optional<WrappingInt32> TCPReceiver::ackno() {

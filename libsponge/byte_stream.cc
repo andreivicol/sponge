@@ -21,23 +21,27 @@ size_t ByteStream::write(const string &data) {
     //    auto bytesLeft = remaining_capacity();
     //    remainingStream += data;
 
-//    if (not remaining_capacity()) {
-//        read(stream.size());
-//        bytesWritten += stream.size();
-//    }
+    //    if (not remaining_capacity()) {
+    //        read(stream.size());
+    //        bytesWritten += stream.size();
+    //    }
 
     while (not data.empty()) {
         if (allowWriting()) {
-            for (auto i = bytesWritten; i != bytesWritten + std::min(remaining_capacity(), data.size() - bytesWritten);
-                 ++i) {
+            for (auto i = 0; i != std::min(remaining_capacity(), data.size()); ++i) {
                 stream.emplace_back(data[i]);
             }
-            bytesWritten += std::min(remaining_capacity(), data.size() - bytesWritten);
+            bytesWritten += std::min(remaining_capacity(), data.size());
+
+            if (data.size() <= remaining_capacity()) {
+                end_input();
+                inputEnded = true;
+            }
         }
 
-//        if (not remaining_capacity()) {
-//            read(stream.size());
-//        }
+        //        if (not remaining_capacity()) {
+        //            read(stream.size());
+        //        }
     }
 
     //
@@ -54,7 +58,6 @@ size_t ByteStream::write(const string &data) {
     //        remainingStream.erase(remainingStream.begin(), remainingStream.begin() + bytesLeft);
     //        bytesWritten = bytesLeft;
     //    }
-    inputEnded = true;
 
     return bytesWritten;
 }
@@ -85,9 +88,7 @@ std::string ByteStream::read(const size_t len) {
 }
 
 void ByteStream::end_input() {
-    if (inputEnded) {
-        std::puts("Byte stream ended");
-    }
+    std::puts("Stream has ended.");
 }
 
 bool ByteStream::input_ended() const { return inputEnded; }
@@ -96,12 +97,13 @@ size_t ByteStream::buffer_size() const { return stream.size(); }
 
 bool ByteStream::buffer_empty() const { return stream.empty(); }
 
-bool ByteStream::eof() const { return false; }
-
 size_t ByteStream::bytes_written() const { return bytesWritten; }
 
 size_t ByteStream::bytes_read() const { return bytesRead; }
 
 size_t ByteStream::remaining_capacity() const { return capacity - stream.size(); }
 
-bool ByteStream::allowWriting() const { return capacity > stream.size() ;}
+bool ByteStream::allowWriting() const { return capacity > stream.size(); }
+
+bool ByteStream::eof() const { return stream.empty(); }
+

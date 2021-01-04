@@ -25,24 +25,29 @@ void StreamReassembler::push_substring(const string &data, const size_t index, c
         if (allowWritingToBuffer(data)) {  // check if there's enough space on buffer to write segment
             _output.write(data);
             lastByteWritten += segmentSize;  // update lastByteWritten to check next segment
+        } else {
+            _output.write(data.substr(0, _output.remaining_capacity()));
+            lastByteWritten += _output.remaining_capacity();
         }
-    } else {
+    } else { // if its an out of order segment
         if (segmentSize <= freeMemory()) {  // make sure capacity is not exceeded
-            storedInMemory.emplace_back(std::make_pair(data, index));
+            storedInMemory.emplace_back(std::make_pair(data, index)); // write the full segment
+        } else { // if its larger than the available memory, write only what fits
+            storedInMemory.emplace_back(std::make_pair(data.substr(0, freeMemory()), index));
         }
     }
 
-    if (segmentSize > freeMemory() or eof) {
-        std::sort(storedInMemory.begin(),
+    if (freeMemory() == 0 or eof) { // if either EOF or full storing capacity were reached,
+        std::sort(storedInMemory.begin(), // sort the segments by ascending stream index
                   storedInMemory.end(),
                   [](std::pair<std::string, size_t> &rhs, std::pair<std::string, size_t> &lhs) {
                       return rhs.second > lhs.second;
                   });
 
-        for (const auto & segment : storedInMemory){
+        for (const auto & segment : storedInMemory){ // and write them to the stream
             _output.write(segment.first);
         }
-        lastByteWritten = index + segmentSize;
+        lastByteWritten = index + segmentSize; // update last byte written for future segments
     }
 }
 
