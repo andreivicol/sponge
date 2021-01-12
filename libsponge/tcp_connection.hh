@@ -1,10 +1,10 @@
 #ifndef SPONGE_LIBSPONGE_TCP_FACTORED_HH
 #define SPONGE_LIBSPONGE_TCP_FACTORED_HH
 
-#include "tcp_config.hh"
+#include "tcp_helpers/tcp_config.hh"
 #include "tcp_receiver.hh"
 #include "tcp_sender.hh"
-#include "tcp_state.hh"
+#include "tcp_helpers/tcp_state.hh"
 
 //! \brief A complete endpoint of a TCP connection
 class TCPConnection {

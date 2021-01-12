@@ -10,13 +10,41 @@
 #include <queue>
 #include <map>
 
+#include <random>
+#include <atomic>
+#include <cstddef>
+#include <cstdint>
+#include <thread>
+
+#define DEFAULT_PERIOD 1000000
+
+class Clock{
+  public:
+    Clock();
+    explicit Clock(const std::uintmax_t& period);
+    ~Clock();
+
+    std::uintmax_t getElapsedTime() const;
+
+  protected:
+  private:
+    void run();
+    void timer(const size_t milliseconds);
+
+    std::uintmax_t period;
+    std::atomic<std::uintmax_t> elapsedTime;
+    std::atomic<bool> running;
+    std::thread th;
+    std::atomic<bool> runningTimer;
+};
+
 //! \brief The "sender" part of a TCP implementation.
 
 //! Accepts a ByteStream, divides it up into segments and sends the
 //! segments, keeps track of which segments are still in-flight,
 //! maintains the Retransmission Timer, and retransmits in-flight
 //! segments if the retransmission timer expires.
-class TCPSender {
+class TCPSender{
   private:
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
@@ -34,7 +62,14 @@ class TCPSender {
     uint64_t _next_seqno{0};
 
     size_t consecutiveRetransmissions;
-    std::map<TCPSegment, std::pair<WrappingInt32, unsigned int>> segmentsStored;
+    std::map<TCPSegment, std::pair<WrappingInt32, unsigned int>> segmentsStored; // segment, ackno, retransmissions
+    uint16_t lastWindowSize;
+    uintmax_t elapsedTime;
+    size_t timeAlive;
+    unsigned int RTO;
+    std::string bufferMessage;
+
+    Clock clock;
 
   public:
     //! Initialize a TCPSender
@@ -92,5 +127,6 @@ class TCPSender {
     WrappingInt32 next_seqno() const { return wrap(_next_seqno, _isn); }
     //!@}
 };
+
 
 #endif  // SPONGE_LIBSPONGE_TCP_SENDER_HH
