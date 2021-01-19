@@ -6,36 +6,42 @@
 #include "tcp_helpers/tcp_segment.hh"
 #include "wrapping_integers.hh"
 
-#include <functional>
-#include <queue>
-#include <map>
-
-#include <random>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <functional>
+#include <map>
+#include <queue>
+#include <random>
 #include <thread>
+#include <functional>
 
 #define DEFAULT_PERIOD 1000000
 
-class Clock{
+class Clock {
   public:
-    Clock();
-    explicit Clock(const std::uintmax_t& period);
+    Clock() ;
+    Clock(std::uintmax_t period, std::function<void(size_t)>&& func);
     ~Clock();
 
     std::uintmax_t getElapsedTime() const;
+    void startTimer(const uintmax_t milliseconds);
+    bool isTimerExpired();
 
   protected:
   private:
     void run();
-    void timer(const size_t milliseconds);
+    void timer();
 
     std::uintmax_t period;
     std::atomic<std::uintmax_t> elapsedTime;
     std::atomic<bool> running;
     std::thread th;
+    std::thread RTOTimer;
     std::atomic<bool> runningTimer;
+    std::uintmax_t initial;
+    uintmax_t milliseconds;
+    std::function<void(size_t)> function;
 };
 
 //! \brief The "sender" part of a TCP implementation.
@@ -44,7 +50,7 @@ class Clock{
 //! segments, keeps track of which segments are still in-flight,
 //! maintains the Retransmission Timer, and retransmits in-flight
 //! segments if the retransmission timer expires.
-class TCPSender{
+class TCPSender {
   private:
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
@@ -62,7 +68,7 @@ class TCPSender{
     uint64_t _next_seqno{0};
 
     size_t consecutiveRetransmissions;
-    std::map<TCPSegment, std::pair<WrappingInt32, unsigned int>> segmentsStored; // segment, ackno, retransmissions
+    std::map<TCPSegment, std::pair<WrappingInt32, uintmax_t>> segmentsStored;  // segment, ackno, transmission time
     uint16_t lastWindowSize;
     uintmax_t elapsedTime;
     size_t timeAlive;
@@ -126,7 +132,9 @@ class TCPSender{
     //! \brief relative seqno for the next byte to be sent
     WrappingInt32 next_seqno() const { return wrap(_next_seqno, _isn); }
     //!@}
-};
 
+    uintmax_t getElapsedTime() const { return clock.getElapsedTime(); }
+    void callback(size_t milliseconds);
+};
 
 #endif  // SPONGE_LIBSPONGE_TCP_SENDER_HH

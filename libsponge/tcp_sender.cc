@@ -21,7 +21,8 @@ TCPSender::TCPSender(const size_t capacity, const uint16_t retx_timeout, const s
     , lastWindowSize(1)
     , elapsedTime(0)
     , timeAlive(0)
-    , RTO{retx_timeout} {}
+    , RTO{retx_timeout}
+    , clock(1000000, std::bind(&TCPSender::callback, this)) {}
 
 uint64_t TCPSender::bytes_in_flight() const {
     size_t bytes = 0;
@@ -43,7 +44,7 @@ void TCPSender::fill_window() {
     // something about setting up SYN FIN ACKNO
 
     _segments_out.push(toSend);
-    segmentsStored[toSend] = std::make_pair(toSend.header().ackno, 0);
+    segmentsStored[toSend] = std::make_pair(toSend.header().ackno, clock.getElapsedTime());
 }
 
 //! \param ackno The remote receiver's ackno (acknowledgment number)
@@ -70,10 +71,28 @@ void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_si
     } else {
         send_empty_segment();
     }
+
+    consecutiveRetransmissions = 0;
+    RTO = _initial_retransmission_timeout;
+    clock.startTimer(RTO);
 }
 
 //! \param[in] ms_since_last_tick the number of milliseconds since the last call to this method
-void TCPSender::tick(const size_t ms_since_last_tick) { timeAlive += ms_since_last_tick; }
+void TCPSender::tick(const size_t ms_since_last_tick) {
+    timeAlive += ms_since_last_tick;
+
+    for (auto unsent : segmentsStored){
+        if (clock.getElapsedTime() - unsent.second.second > RTO){
+                  _segments_out.push(unsent.first);
+                  if (lastWindowSize > 0){
+                      ++consecutiveRetransmissions;
+                      RTO *= 2;
+                  }
+                  clock.startTimer(RTO);
+//                  break;
+        }
+    }
+}
 
 unsigned int TCPSender::consecutive_retransmissions() const { return consecutiveRetransmissions; }
 
@@ -85,15 +104,32 @@ void TCPSender::send_empty_segment() {
     _segments_out.push(empty);
 }
 
-Clock::Clock() : Clock(DEFAULT_PERIOD) {}  // delegate
+void TCPSender::callback(size_t milliseconds) {
+    tick(milliseconds);
+}
 
-Clock::Clock(const std::uintmax_t &period)
-    : period(period), elapsedTime(0), running(true), th(&Clock::run, this), runningTimer(false) {}
+Clock::Clock() {}  // delegate
+
+Clock::Clock(const std::uintmax_t period, std::function<void(size_t)> &&func)
+    : period(period)
+    , elapsedTime(0)
+    , running(true)
+    , th(&Clock::run, this)
+    , RTOTimer(&Clock::timer, this)
+    , runningTimer(false)
+    , initial(0)
+    , milliseconds(0)
+    , function(func) {}
 
 Clock::~Clock() {
     if (th.joinable()) {
         running = false;
         th.join();
+    }
+
+    if (RTOTimer.joinable()) {
+        runningTimer = false;
+        RTOTimer.join();
     }
 }
 
@@ -108,4 +144,25 @@ void Clock::run() {
 
 std::size_t Clock::getElapsedTime() const { return elapsedTime; }
 
-void Clock::timer(const size_t milliseconds) {}
+void Clock::timer() {
+//    initial = elapsedTime;
+    while (this->runningTimer) {
+        if (elapsedTime - initial >= milliseconds) {
+            initial = elapsedTime;
+            runningTimer = false;
+            function(milliseconds);
+        }
+    }
+}
+
+void Clock::startTimer(const uintmax_t milliseconds) {
+    this->milliseconds = milliseconds;
+    this->runningTimer = true;
+}
+
+bool Clock::isTimerExpired() {
+//    if (elapsedTime - initial > period) {
+//        return true;
+//    }
+    return !runningTimer;
+}
