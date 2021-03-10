@@ -14,7 +14,7 @@ void DUMMY_CODE(Targs &&... /* unused */) {}
 
 using namespace std;
 
-ByteStream::ByteStream(const size_t capacity) : stream(0), capacity(capacity), bytesWritten(0), bytesRead(0) {}
+ByteStream::ByteStream(const size_t cap) : stream(0), capacity(cap), bytesWritten(0), bytesRead(0) {}
 
 size_t ByteStream::write(const string &data) {
     //    size_t bytesWritten = 0;
@@ -64,7 +64,7 @@ size_t ByteStream::write(const string &data) {
 
 //! \param[in] len bytes will be copied from the output side of the buffer
 string ByteStream::peek_output(const size_t len) const {
-    char copied[capacity];
+    char copied[1000];
     for (size_t i = 0; i != len; ++i) {
         copied[i] = stream[i];
     }

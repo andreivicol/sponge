@@ -29,7 +29,7 @@ void TCPReceiver::segment_received(const TCPSegment &seg) {
 //    }
 }
 
-optional<WrappingInt32> TCPReceiver::ackno() {
+optional<WrappingInt32> TCPReceiver::ackno() const{
     if (isn.raw_value()){
         return std::optional<WrappingInt32>{ WrappingInt32{static_cast<uint32_t >(_reassembler.getLastByteWritten())} };
     }

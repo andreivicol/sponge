@@ -34,7 +34,7 @@ class StreamReassembler {
 
     size_t freeMemory();
 
-    size_t getLastByteWritten();
+    size_t getLastByteWritten() const;
 
 
     //! \brief Receive a substring and write any newly contiguous bytes into the stream.
